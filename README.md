@@ -1,6 +1,6 @@
 #  Database Interface Abstraction Library
 
-This is the database interface abstraction library used by (Silicon Mechanics)[http://www.siliconmechanics.com/].  It is derived from the library used by the (MythWeb)[http://www.mythtv.org/wiki/MythWeb] plugin for (MythTV)[http://www.mythtv.org/].  The original author provided the code to us under the terms that we would release changes back to the open source community.
+This is the database interface abstraction library used by [Silicon Mechanics](http://www.siliconmechanics.com/).  It is derived from the library used by the [MythWeb](http://www.mythtv.org/wiki/MythWeb) plugin for [MythTV](http://www.mythtv.org/).  The original author provided the code to us under the terms that we would release changes back to the open source community.
 
 This code is licensed under the GPL.
 
