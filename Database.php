@@ -275,11 +275,11 @@ abstract class Database {
  **/
     public function __destruct() {
         if (is_array($this->destruct_handlers)) {
-		// If we're doing a real destruct (instead of being called from a shutdown
-		// handler), we might need to recreate ourself in the global scope so
-		// that the things we're about to call can actually do their jobs.
-			if ($this->global_name && empty($GLOBALS[$this->global_name]))
-				$GLOBALS[$this->global_name] =& $this;
+        // If we're doing a real destruct (instead of being called from a shutdown
+        // handler), we might need to recreate ourself in the global scope so
+        // that the things we're about to call can actually do their jobs.
+            if ($this->global_name && empty($GLOBALS[$this->global_name]))
+                $GLOBALS[$this->global_name] =& $this;
         // call_user_func(_array) is smart enough to deal with all callback
         // types, including anonymous functions.  Yay!
             foreach ($this->destruct_handlers as $call) {
@@ -289,9 +289,9 @@ abstract class Database {
                     call_user_func($call['f']);
             }
         }
-	// We can only get destroyed once, so let's make sure that when we are inevitably
-	// called again (because this codebase sucks) that we don't try to repeat ourselves.
-		unset($this->destruct_handlers);
+    // We can only get destroyed once, so let's make sure that when we are inevitably
+    // called again (because this codebase sucks) that we don't try to repeat ourselves.
+        unset($this->destruct_handlers);
     }
 
 

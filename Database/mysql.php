@@ -52,18 +52,18 @@ class Database_mysql extends Database {
             $new_link = array_key_exists('new_link', $options) ? $options['new_link'] : true;
         }
     // Open our connection...
-		if($pconnect)
-			$this->dbh = @mysql_pconnect($port ? "$server:$port" : $server, $login, $password, $new_link, $flags);
-		else
-			$this->dbh = @mysql_connect($port ? "$server:$port" : $server, $login, $password, $new_link, $flags);
+        if($pconnect)
+            $this->dbh = @mysql_pconnect($port ? "$server:$port" : $server, $login, $password, $new_link, $flags);
+        else
+            $this->dbh = @mysql_connect($port ? "$server:$port" : $server, $login, $password, $new_link, $flags);
     // ... and ask for the database
         if ($this->dbh) {
             @mysql_select_db($db_name, $this->dbh)
                 or $this->error("Can't access the database file. ($login@$server:$port/$db_name)", false);
         } else {
-			$this->dbh = null;
-			$this->error("Can't connect to the database server. ($login@$server:$port/$db_name)", false);
-		}
+            $this->dbh = null;
+            $this->error("Can't connect to the database server. ($login@$server:$port/$db_name)", false);
+        }
     }
 
 
