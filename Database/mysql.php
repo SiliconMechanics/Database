@@ -46,7 +46,7 @@ class Database_mysql extends Database {
         $pconnect = false;
         $flags = null;
         $new_link = true;
-        if(is_valid_array($options)) {
+        if(Database_Functions::is_valid_array($options)) {
             $pconnect = array_key_exists('pconnect', $options) ? $options['pconnect'] : false;
             $flags = array_key_exists('flags', $options) ? $options['flags'] : null;
             $new_link = array_key_exists('new_link', $options) ? $options['new_link'] : true;
@@ -93,7 +93,7 @@ class Database_mysql extends Database {
 
 /**
  * Return the string error from the last error.
- * 
+ *
  * @return string
  **/
     public function _errstr() {
@@ -103,7 +103,7 @@ class Database_mysql extends Database {
 
 /**
  * Return the numeric error from the last error.
- * 
+ *
  * @return int
  **/
     public function _errno() {
@@ -119,4 +119,3 @@ class Database_mysql extends Database {
     }
 
 }
-
