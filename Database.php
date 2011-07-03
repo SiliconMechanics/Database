@@ -11,13 +11,13 @@
  *
  * The Database classes use a variation on the PEAR / PSR-0 class naming
  * scheme, so any compliant autoloader should do the trick.
- * 
+ *
  * This file is based on code originally written by Chris Petersen for several
  * different open source projects.  He has granted Silicon Mechanics permission
  * to use this file under the LGPL license, on the condition that SiMech release
  * any changes under the GPL, so that improvements can be merged back into GPL
  * projects.
- * 
+ *
  * @copyright   Silicon Mechanics
  * @license     GPL for public distribution
  *
@@ -242,7 +242,7 @@ abstract class Database {
 /**
  * Undo ByteField encoding, if needed.  Impl specific depending on how byte
  * fields are handled by the underlying database.
- * 
+ *
  * @return string
  **/
     public function unescape_bytefield($bytes) {
@@ -266,7 +266,7 @@ abstract class Database {
 
 /**
  * Return the string error from the last error.
- * 
+ *
  * @return string
  **/
     abstract public function _errstr();
@@ -274,7 +274,7 @@ abstract class Database {
 
 /**
  * Return the numeric error from the last error.
- * 
+ *
  * @return int
  **/
     abstract public function _errno();
@@ -288,7 +288,7 @@ abstract class Database {
 
 /**
  * Prepare a query.
- * 
+ *
  * @param string $query
  * @return Database_Query
  **/
@@ -488,9 +488,9 @@ abstract class Database {
 
 /**
  * Returns the first column of the first row from the query and frees the result.
- * 
+ *
  * Alias of query_col.
- * 
+ *
  * @param string $query    The query string
  * @param mixed  $arg      Query arguments to escape and insert at ? placeholders in $query
  * @param mixed  ...       Additional arguments
@@ -608,7 +608,7 @@ abstract class Database {
  * Returns a key/value hash of the results from the specified query.  In each
  * pair, the first column from the result becomes the key, the second column
  * becomes the value.  Any other retured columns will be discarded.
- * 
+ *
  * This is an alias of query_keyed_list.
  *
  * @param string $query    The query string
@@ -728,10 +728,10 @@ abstract class Database {
 /**
  * Insert a single-level hash into the specified table.  Column names (keys)
  * need to be properly escaped, if needed by the underlying database.
- * 
+ *
  * @param string $table Table name
  * @param array $values Hash of data to insert, columns as keys.
- * 
+ *
  * @return Database_Query
  **/
     public function insert($table, $values) {
@@ -745,12 +745,12 @@ abstract class Database {
 /**
  * Update one specific table with a hash given a set of criteria.  Like insert,
  * you must escape column names yourself, if the underlying database requires it.
- * 
+ *
  * @param string $table         Table name
  * @param array $values         Hash of columns and values to update
  * @param array $where          Hash of columns and values that must match
  *                              in the WHERE clause of the query.
- * 
+ *
  * @return Database_Query
  **/
     public function update($table, $values, $where) {
@@ -765,7 +765,7 @@ abstract class Database {
  * Update an existing row or perform an insert if the row does not exist.
  * The default implementation uses a select to check.  Subclasses may use
  * database-specific ways to perform upserts.
- * 
+ *
  * @param string $table         Table name.
  * @param array $values         Hash of values to update or insert.
  * @param array $where          Hash of columns and values that must match
@@ -773,7 +773,7 @@ abstract class Database {
  * @param mixed $primary_key    String containing the primary key of the table,
  *                              *OR* array containing a list of columns composing
  *                              a primary key or unique index.
- * 
+ *
  * @return Database_Query Or false if the select returned a non-identical row.
  **/
     public function upsert($table, $values, $where, $primary_key) {
@@ -851,7 +851,7 @@ abstract class Database {
 
 /**
  * Grab the last automatically generated id.
- *  
+ *
  * @return int
  **/
     public function insert_id() {
@@ -861,7 +861,7 @@ abstract class Database {
 
 /**
  * Wrapper for the last query statement's affected_rows method.
- * 
+ *
  * @return int
  **/
     public function affected_rows() {
@@ -885,4 +885,3 @@ abstract class Database {
     }
 
 }
-
