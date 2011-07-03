@@ -94,6 +94,9 @@ abstract class Database {
 /** @var bool       Enable logging of warning messages. */
     public $enable_warning_logging = false;
 
+/** @var array      Container for nicknamed handles to be used for the find function. */
+    private static $dbhs   = array();
+
 
 /******************************************************************************/
 
@@ -110,10 +113,12 @@ abstract class Database {
  * @param string $adapter   Adapter class to use
  * @param array  $options   Hash of var=>value pairs of server options for
  *                          engines that support them
+ * @param string $nickname  The nickname for this connection handle. Defaults
+ *                          to ''. Overwrites previously set nicknames.
  *
  * @return Database         Database subclass based on requested $engine
  **/
-    public static function &connect($db_name, $login, $password, $server = 'localhost', $port = NULL, $adapter = 'mysql_detect', $options = array()) {
+    public static function &connect($db_name, $login, $password, $server = 'localhost', $port = NULL, $adapter = 'mysql_detect', $options = array(), $nickname='') {
     // For consistency, engine names are all lower case.
         $adapter = strtolower($adapter);
     // Can we automatically pick the correct (MySQL) extension?
@@ -145,10 +150,18 @@ abstract class Database {
         // Database::error().  Nonsensical nevertheless.
             echo "DB Error: " . $dbh->error;
         }
+
+        if (!is_null($nickname))
+            self::$dbhs[$nickname] = &$dbh;
     // Return
         return $dbh;
     }
 
+    public static function &find($nickname='') {
+        if (!isset(self::$dbhs[$nickname]))
+            throw new Exception("Unknown database handle $nickname");
+        return self::$dbhs[$nickname];
+    }
 
 /**
  * Squish nested arrays into a nice flat array, suitable for placeholder replacement.
