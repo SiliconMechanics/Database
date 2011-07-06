@@ -28,6 +28,28 @@
  * $Id: Database.php 8207 2010-09-15 04:22:23Z ccapps $
  **/
 
+/**
+ *  Use the spl_autoloader to add a custom database autoloader onto the stack
+ *  First thing is to setup the include path
+ */
+$path = dirname(__file__);
+set_include_path($path . PATH_SEPARATOR . get_include_path());
+
+/**
+ * Now the autoloader
+ * @param string $class The class we are looking for
+ * @return bool Did we load it?
+ **/
+function Database_Autoloader($class) {
+    $class = str_replace('_', DIRECTORY_SEPARATOR, $class);
+    return @include_once("$class.php");
+}
+
+/**
+ *  Push Database_Autoloader onto the spl_autoloader stack
+ **/
+spl_autoload_register('Database_Autoloader');
+
 abstract class Database {
 
 /** @var resource   Resource handle for this database connection */
